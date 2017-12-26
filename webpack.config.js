@@ -11,9 +11,16 @@ var autoprefixer = require('autoprefixer');
 
 var extractCSS;
 var cssLoader;
+var lessLoader;
 extractCSS = new ExtractTextPlugin('[name]/css/[name].css?[contenthash]');
 cssLoader = extractCSS.extract({
     loader: 'css-loader',
+    options: {
+        minimize: false //css压缩
+    }
+});
+lessLoader = extractCSS.extract({
+    loader: 'less-loader',
     options: {
         minimize: false //css压缩
     }
@@ -77,6 +84,9 @@ module.exports = {
 			test: /\.css$/,
 			loader: cssLoader
 		}, {
+            test: /\.less$/,
+            loader: lessLoader
+        }, {
             test: /\.(jpg|png)$/,
             loaders: [
                 //小于10KB的图片会自动转成dataUrl，
@@ -104,14 +114,14 @@ module.exports = {
 			_: 'underscore',
             Swiper:"swiperJs"
 		}),
-		new webpack.optimize.UglifyJsPlugin({
-			compress: {
-				warnings: false
-			},
-			output: {
-				comments: false
-			}
-		}),
+		// new webpack.optimize.UglifyJsPlugin({
+		// 	compress: {
+		// 		warnings: false
+		// 	},
+		// 	output: {
+		// 		comments: false
+		// 	}
+		// }),
         extractCSS
 	].concat(html_plugins()),
 	resolve: {

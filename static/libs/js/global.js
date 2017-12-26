@@ -46,9 +46,7 @@
         },
         canvasWaterMark: function() {
             //设置水印
-            var waterMarkText = global.appName;
-            var canvas = document.createElement('canvas');
-            var ctx = canvas.getContext('2d');
+            var waterMarkText = global.appName,canvas = document.createElement('canvas'),ctx = canvas.getContext('2d');
             canvas.width = canvas.height = 100;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
@@ -116,6 +114,12 @@
             //获取当前的设备属于什么系统
             isIOS: /iPad/i.test(navigator.userAgent) || /iPhone|iPod/i.test(navigator.userAgent),
             isAndroid: /Android/i.test(navigator.userAgent)
+        },
+        reg_test:function () {
+            let mail_reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;//邮箱检测
+            let mobile_reg = /^(1[3|4|5|7|8])\d{9}$/;//手机检测
+            let passward_reg = /^(?!_)(?!.*?_$)^(?=.{5,15})(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*_).*$/;//密码强度检测
+            let chinese_reg = /^[\u4e00-\u9fa5]{0,}$///中文检测
         }
     };
     window.global = global;
